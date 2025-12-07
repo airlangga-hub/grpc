@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package coffeeshop;
+
+option go_package = "github.com/airlangga-hub/grpc/coffeeshop_proto";
+
+service CoffeeShop {
+    rpc GetMenu(MenuRequest) returns (stream Menu) {}
+    rpc PlaceOrder(Order) returns (Receipt) {}
+    rpc GetOrderStatus(Receipt) returns (OrderStatus) {}
+}
+
+message MenuRequest {}
+
+message Order {
+    repeated Item items = 1;
+}
+
+message Receipt {
+    int32 id = 1;
+}
+
+message OrderStatus {
+    int32 orderID = 1;
+    string status = 2;
+}
+
+message Menu {
+    repeated Item items = 1;
+}
+
+message Item {
+    int32 id = 1;
+    string name = 2;
+}
